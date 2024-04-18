@@ -112,10 +112,13 @@ jobs:
           sed -i "s/tag: .*/tag: $version/" values_production.yml
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          commit-message: "Deploy $version to production"
-          title: "Deploy $version to production"
-          branch: "deploy-production-$version"
-          base: "main"
-          token: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+          --base main \
+          --head branch-fuer-aenderungen \
+          --title "Deploy $version to production" \
+          --body "Pull Request body" \
+          --repo github.actor/ArgoCD_GitOps
+        env:
+        GITHUB_TOKEN: ${{ secrets.REPOSITORY_ACCESS_TOKEN }}
+
