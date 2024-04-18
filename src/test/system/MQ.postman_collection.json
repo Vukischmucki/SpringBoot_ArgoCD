@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "1fea6532-eb88-4eaf-931b-f19dcfc6a38c",
+		"name": "MQ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "34324427"
+	},
+	"item": [
+		{
+			"name": "https://api.genderize.io?name=luc",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Gender Vorhanden\r",
+							"pm.test(\"Überprüfe, ob das Feld 'gender' vorhanden ist\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property('gender');\r",
+							"});\r",
+							"\r",
+							"// Geschlecht gültiger Wert\r",
+							"pm.test(\"Überprüfe, ob das Geschlecht ein gültiger Wert ist\", function () {\r",
+							"    var gender = pm.response.json().gender;\r",
+							"    pm.expect(gender).to.be.oneOf(['male', 'female', null]); // Prüft, ob das Geschlecht entweder \"male\", \"female\" oder null ist\r",
+							"});\r",
+							"\r",
+							"// probability vorhanden \r",
+							"pm.test(\"Überprüfe, ob das Feld 'probability' vorhanden ist\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property('probability');\r",
+							"});\r",
+							"\r",
+							"// numerischer Wert Wahrscheinlichkeit\r",
+							"pm.test(\"Überprüfe, ob die Wahrscheinlichkeit ein gültiger numerischer Wert ist\", function () {\r",
+							"    var probability = pm.response.json().probability;\r",
+							"    pm.expect(probability).to.be.a('number');\r",
+							"    pm.expect(probability).to.be.at.least(0); // Prüft, ob die Wahrscheinlichkeit mindestens 0 ist\r",
+							"    pm.expect(probability).to.be.at.most(1); // Prüft, ob die Wahrscheinlichkeit höchstens 1 ist\r",
+							"});\r",
+							"\r",
+							"// Gender Name testen \r",
+							"pm.test(\"Überprüfe erwarteten Gender für den Namen\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"pm.globals.get(\"variable_key\");\r",
+							"    pm.expect(jsonData.gender).to.eql(\"male\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.genderize.io?name=luc",
+					"protocol": "https",
+					"host": [
+						"api",
+						"genderize",
+						"io"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "luc"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
