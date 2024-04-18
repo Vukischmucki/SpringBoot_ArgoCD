@@ -120,5 +120,5 @@ jobs:
           --body "Pull Request body" \
           --repo github.actor/ArgoCD_GitOps
         env:
-        GITHUB_TOKEN: ${{ secrets.REPOSITORY_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.REPOSITORY_ACCESS_TOKEN }}
 
