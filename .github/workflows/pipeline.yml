@@ -41,6 +41,11 @@ jobs:
         with:
           java-version: 17
 
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Newman tests
+        run: newman run SpringBoot_ArgoCD/test/system/Postman test
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
