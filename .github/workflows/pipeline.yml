@@ -95,7 +95,7 @@ jobs:
           # Example:
           # newman run collection.json -e environment.json
 
-deploy-to-production:
+  deploy-to-production:
   runs-on: ubuntu-latest
   if: github.ref == 'refs/heads/main'
   steps:
