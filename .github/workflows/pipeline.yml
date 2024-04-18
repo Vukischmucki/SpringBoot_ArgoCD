@@ -125,7 +125,23 @@ jobs:
 
       - name: Create Pull Request
         uses: repo-sync/pull-request@v4
-        with:
+        wi    - name: Create New Branch
+        run: |
+         git checkout -b branch-fuer-aenderungen
+
+      - name: Sync with origin
+        run: |
+          git fetch origin
+          git rebase origin/main
+
+      - name: Add values_production.yml and Commit Changes
+        run: |
+          git add values_production.yml
+          git commit --allow-empty -m "Deploy $version to production"
+
+      - name: Push Branch
+        run: |
+          git push origin branch-fuer-aenderungenth:
           source_branch: "production-deploy-$GITHUB_RUN_ID"
           destination_branch: "main"
           pr_title: "Deploy $version to production"
